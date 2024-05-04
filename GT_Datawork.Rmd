@@ -8,21 +8,29 @@ output: github_document
 ```{r library, echo = T}
 library(ggplot2)
 library(magrittr)
+library(readr)
 library(RCurl)
 
 ```
 
 
 ```{r data import, echo = F}
-read.csv()
+logger_A_data <- read.csv("~/GitHub/GillData/logger_A_data.csv", na.strings="#N/A")
+logger_C_data <- read.csv("~/GitHub/GillData/logger_C_data.csv", na.strings="#N/A")
+logger_D_data <- read.csv("~/GitHub/GillData/logger_D_data.csv", na.strings="#N/A")
+logger_E_data <- read.csv("~/GitHub/GillData/logger_E_data.csv", na.strings="#N/A")
+logger_F_data <- read.csv("~/GitHub/GillData/logger_F_data.csv", na.strings="#N/A")
+logger_G_data <- read.csv("~/GitHub/GillData/logger_G_data.csv", na.strings="#N/A")
+
+View(logger_A_data)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+```{r data transforming, echo = F}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+
+
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
