@@ -5,7 +5,7 @@ date: "2024-05-03"
 output: github_document
 ---
 
-```{r library, echo = T}
+```{r library, echo = T, results = hide }
 library(ggplot2)
 library(magrittr)
 library(readr)
@@ -16,7 +16,7 @@ library(tidyverse)
 ```
 
 
-```{r data import, echo = F}
+```{r data import, echo = F, results = hide}
 logger_A_data <- read.csv("~/GitHub/GillData/logger_A_data.csv", na.strings="#N/A")
 logger_C_data <- read.csv("~/GitHub/GillData/logger_C_data.csv", na.strings="#N/A")
 logger_D_data <- read.csv("~/GitHub/GillData/logger_D_data.csv", na.strings="#N/A")
@@ -30,14 +30,10 @@ head(logger_A_data)
 
 ```{r data transforming, echo = F}
 #transposing  data
-
-# Specify the columns you want to become unique rows
 unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
-# Transpose the data
 transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
 
-# View the transposed data
 str(transposed_data_A)
 
 # Converting to date-time using POSIXct (may not be necessary?)
