@@ -31,21 +31,21 @@ head(logger_A_data)
 ```{r data transforming, echo = F}
 #transposing  data
 
-
 # Specify the columns you want to become unique rows
 unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
 # Transpose the data
-transposed_data_A <- pivot_longer(logger_A_data, cols = unique_columns, names_to = "Port", values_to = "WaterAmt")
+transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
 
 # View the transposed data
 str(transposed_data_A)
 
-# Converting to date-time using POSIXct
-dfA <- mutate(transposed_data_A, z6.07504 <- as.POSIXct(transposed_data_A$z6.07504, format = "%m/%d/%y %H:%M", tz = ""))
+# Converting to date-time using POSIXct (may not be necessary?)
+#dfA <- mutate(transposed_data_A, z6.07504 <- as.POSIXct(transposed_data_A$z6.07504, format = "%m/%d/%y %H:%M", tz = ""))
 
 # View the converted POSIXct object
-print(dfA)
+#view(dfA)
+#str(dfA)
 
 ```
 
