@@ -36,12 +36,29 @@ transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), 
 
 str(transposed_data_A)
 
+#Adding in Treatments, Fallow Y/N, and renaming columns
+
+dataframe_A <- transposed_data_A %>% 
+  rename(Datetime = "z6.07504") %>% 
+  select(Datetime, Port, WaterAmt)
+
+view(dataframe_A)
+
 # Converting to date-time using POSIXct (may not be necessary?)
 #dfA <- mutate(transposed_data_A, z6.07504 <- as.POSIXct(transposed_data_A$z6.07504, format = "%m/%d/%y %H:%M", tz = ""))
 
 # View the converted POSIXct object
 #view(dfA)
 #str(dfA)
+
+```
+```{r visualizations, echo = T}
+#Timestamp vs. Water Content
+
+
+
+
+
 
 ```
 
