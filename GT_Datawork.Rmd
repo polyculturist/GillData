@@ -44,27 +44,22 @@ dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H
 #class(dataframe_A$Datetimes)
 
 #Adding in Treatments, Fallow Y/N
+dataframe_A <- dataframe_A %>% 
+  mutate(treatment = case_when(
+    Port == "Port.1" ~ "TREATMENT_1",
+    Port == "Port.2" ~ "TREATMENT_1",
+    Port == "Port.3" ~ "TREATMENT_1",
+    Port == "Port.4" ~ "TREATMENT_2",
+    Port == "Port.5" ~ "TREATMENT_2",
+    Port == "Port.6" ~ "TREATMENT_2"
+  ))
 
-
-
-
-
-
+view(dataframe_A)
 ```
 
 
 ```{r visualizations, echo = T}
-#Timestamp vs. Water Content
-
-# Example character data representing datetime
-char_datetime <- "2024-05-04 13:40:00"
-class(char_datetime)
-# Convert character data to POSIXct
-datetime <- as.POSIXct(char_datetime, format = "%Y-%m-%d %H:%M:%S")
-# Check the class of the object
-class(datetime)
-# Print the object
-print(datetime)
+#Timestamp vs. Water Content, color = Fallow YN
 
 
 ```
