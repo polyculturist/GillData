@@ -24,7 +24,7 @@ logger_E_data <- read.csv("~/GitHub/GillData/logger_E_data.csv", na.strings="#N/
 logger_F_data <- read.csv("~/GitHub/GillData/logger_F_data.csv", na.strings="#N/A")
 logger_G_data <- read.csv("~/GitHub/GillData/logger_G_data.csv", na.strings="#N/A")
 
-head(logger_A_data)
+#head(logger_A_data)
 ```
 
 
@@ -34,24 +34,21 @@ unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
 transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
 
-#str(transposed_data_A)
 # Renaming columns
 dataframe_A <- transposed_data_A %>% 
   rename(Datetimes = "z6.07504") %>% 
-  select(Datetimes, Port, WaterAmt) %>% 
-  as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
+  select(Datetimes, Port, WaterAmt)
 
-view(dataframe_A)
-class(dataframe_A)
-# Converting to date-time using POSIXct
-datetime <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
+#Conversion char to POSIXct (unix time)
+dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
+#class(dataframe_A$Datetimes)
 
-
-#dfA <- mutate(dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = ""))
-
-class(datetime)
-view(datetime)
 #Adding in Treatments, Fallow Y/N
+
+
+
+
+
 
 ```
 
