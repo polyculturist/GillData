@@ -34,30 +34,40 @@ unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
 transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
 
-str(transposed_data_A)
-
-#Adding in Treatments, Fallow Y/N, and renaming columns
-
+#str(transposed_data_A)
+# Renaming columns
 dataframe_A <- transposed_data_A %>% 
-  rename(Datetime = "z6.07504") %>% 
-  select(Datetime, Port, WaterAmt)
+  rename(Datetimes = "z6.07504") %>% 
+  select(Datetimes, Port, WaterAmt) %>% 
+  as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
 
 view(dataframe_A)
+class(dataframe_A)
+# Converting to date-time using POSIXct
+datetime <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
 
-# Converting to date-time using POSIXct (may not be necessary?)
-#dfA <- mutate(transposed_data_A, z6.07504 <- as.POSIXct(transposed_data_A$z6.07504, format = "%m/%d/%y %H:%M", tz = ""))
 
-# View the converted POSIXct object
-#view(dfA)
-#str(dfA)
+#dfA <- mutate(dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = ""))
+
+class(datetime)
+view(datetime)
+#Adding in Treatments, Fallow Y/N
 
 ```
+
+
 ```{r visualizations, echo = T}
 #Timestamp vs. Water Content
 
-
-
-
+# Example character data representing datetime
+char_datetime <- "2024-05-04 13:40:00"
+class(char_datetime)
+# Convert character data to POSIXct
+datetime <- as.POSIXct(char_datetime, format = "%Y-%m-%d %H:%M:%S")
+# Check the class of the object
+class(datetime)
+# Print the object
+print(datetime)
 
 
 ```
