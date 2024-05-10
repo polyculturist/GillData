@@ -72,11 +72,22 @@ view(dataframe_A)
 
 
 ```{r visualizations, echo = T}
-#Timestamp vs. Water Content, color = Fallow YN
-ggplot( dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Depth.cm, shape = Treatment)) +
+#Timestamp vs. Water Content, color = Depth
+ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
   geom_point() + 
   scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
 
+
+#Timestamp vs. Water Content, color = Treatment
+ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
+  geom_point() + 
+  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
 ```
 
+```{r Visualizations 2, echo = T}
 
+
+
+
+
+```
