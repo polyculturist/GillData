@@ -3,33 +3,62 @@ GT_Datawork
 migs
 2024-05-03
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax
-for authoring HTML, PDF, and MS Word documents. For more details on
-using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that
-includes both content as well as the output of any embedded R code
-chunks within the document. You can embed an R code chunk like this:
-
 ``` r
-summary(cars)
+library(ggplot2)
+library(magrittr)
+library(readr)
+library(RCurl)
+library(tidyr)
 ```
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+    ## 
+    ## Attaching package: 'tidyr'
 
-## Including Plots
+    ## The following object is masked from 'package:RCurl':
+    ## 
+    ##     complete
 
-You can also embed plots, for example:
+    ## The following object is masked from 'package:magrittr':
+    ## 
+    ##     extract
 
-![](GT_Datawork_files/figure-gfm/pressure-1.png)<!-- -->
+``` r
+library(tidyverse)
+```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ purrr     1.0.2
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ tidyr::complete()  masks RCurl::complete()
+    ## ✖ tidyr::extract()   masks magrittr::extract()
+    ## ✖ dplyr::filter()    masks stats::filter()
+    ## ✖ dplyr::lag()       masks stats::lag()
+    ## ✖ purrr::set_names() masks magrittr::set_names()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+#Timestamp vs. Water Content, color = Depth
+ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
+  geom_point() + 
+  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+```
+
+    ## Warning: Removed 33598 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](GT_Datawork_files/figure-gfm/visualizations-1.png)<!-- -->
+
+``` r
+#Timestamp vs. Water Content, color = Treatment
+ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
+  geom_point() + 
+  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+```
+
+    ## Warning: Removed 33598 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](GT_Datawork_files/figure-gfm/visualizations-2.png)<!-- -->
