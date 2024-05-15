@@ -5,7 +5,7 @@ date: "2024-05-03"
 output: github_document
 ---
 
-```{r library, echo = T, results = hide }
+```{r library, echo = T }
 library(ggplot2)
 library(magrittr)
 library(readr)
@@ -16,7 +16,7 @@ library(tidyverse)
 ```
 
 
-```{r data import, echo = F, results = hide}
+```{r data import, echo = F}
 logger_A_data <- read.csv("~/GitHub/GillData/logger_A_data.csv", na.strings="#N/A")
 logger_C_data <- read.csv("~/GitHub/GillData/logger_C_data.csv", na.strings="#N/A")
 logger_D_data <- read.csv("~/GitHub/GillData/logger_D_data.csv", na.strings="#N/A")
@@ -46,12 +46,12 @@ dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H
 #Adding in Treatments, Fallow Y/N
 dataframe_A <- dataframe_A %>% 
   mutate(Treatment = case_when(
-    Port == "Port.1" ~ "TREATMENT_1",
-    Port == "Port.2" ~ "TREATMENT_1",
-    Port == "Port.3" ~ "TREATMENT_1",
-    Port == "Port.4" ~ "TREATMENT_2",
-    Port == "Port.5" ~ "TREATMENT_2",
-    Port == "Port.6" ~ "TREATMENT_2"
+    Port == "Port.1" ~ "Rye-Radish",
+    Port == "Port.2" ~ "Rye-Radish",
+    Port == "Port.3" ~ "Rye-Radish",
+    Port == "Port.4" ~ "Rye-Vetch",
+    Port == "Port.5" ~ "Rye-Vetch",
+    Port == "Port.6" ~ "Rye-Vetch"
   ))
 
 #Adding in Depths
