@@ -138,7 +138,7 @@ df <- combined_transposed %>%
 ```
 
 
-```{r visualizations, echo = T}
+```{r basic visualizations, echo = T}
 #Timestamp vs. Water Content, color = Depth
 ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
   geom_smooth() + 
