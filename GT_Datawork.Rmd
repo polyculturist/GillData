@@ -110,7 +110,7 @@ combined_transposed <- combined_transposed %>%
 
 ```{r Adding in Treatments, Fallow Y/N, echo = F}
 #Adding Treatments
-combined_transposed <- combined_transposed %>% 
+df <- combined_transposed %>% 
   mutate(Treatment = case_when(
     #Logger A
       ((Port == "Port.1" | Port == "Port.2" | Port == "Port.3") & logger == "A") ~ "Rye-Radish",
@@ -134,21 +134,23 @@ combined_transposed <- combined_transposed %>%
   )) %>% 
   mutate(Fallow_YN = ifelse(Treatment == "Fallow", "Y", "N"))
   
-view(combined_transposed)
+#view(df)
 ```
 
 
 ```{r visualizations, echo = T}
 #Timestamp vs. Water Content, color = Depth
-ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
-  geom_point() + 
-  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
+  geom_smooth() + 
+ # geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 
 #Timestamp vs. Water Content, color = Treatment
-ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
-  geom_point() + 
-  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
+  geom_smooth() + 
+ # geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 ```
 
 ```{r Visualizations 2, echo = T}
