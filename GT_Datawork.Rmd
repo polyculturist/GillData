@@ -131,7 +131,9 @@ combined_transposed <- combined_transposed %>%
       ((Port == "Port.1" | Port == "Port.2" | Port == "Port.3") & logger == "G") ~ "4-seed",
       ((Port == "Port.4" | Port == "Port.5" | Port == "Port.6") & logger == "G") ~ "Fallow",
     TRUE ~ NA_character_
-  ))
+  )) %>% 
+  mutate(Fallow_YN = ifelse(Treatment == "Fallow", "Y", "N"))
+  
 view(combined_transposed)
 ```
 
