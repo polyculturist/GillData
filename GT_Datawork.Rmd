@@ -73,36 +73,29 @@ logger_G_data <- logger_G_data %>%
 #Combining all loggers' data
 combined_data <- rbind(logger_A_data, logger_C_data, logger_D_data, logger_E_data, logger_F_data, logger_G_data)
 
+view(combined_data)
+
 ```
 
 ```{r data transforming, echo = F}
 #transposing  data
 unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
-transposed_data_A <- pivot_longer(logger_A_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
+combined_transposed <- pivot_longer(combined_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
 
-# Renaming columns
-dataframe_A <- transposed_data_A %>% 
-  rename(Datetimes = "z6.07504") %>% 
-  select(Datetimes, Port, WaterAmt)
+#view(combined_transposed)
 
 #Conversion char to POSIXct (unix time)
-dataframe_A$Datetimes <- as.POSIXct(dataframe_A$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
-#class(dataframe_A$Datetimes)
+combined_transposed$Datetimes <- as.POSIXct(combined_transposed$Datetimes, format = "%m/%d/%y %H:%M", tz = "")
+#class(combined_transposed$Datetimes)
 
-#Adding in Treatments, Fallow Y/N
-dataframe_A <- dataframe_A %>% 
-  mutate(Treatment = case_when(
-    Port == "Port.1" ~ "Rye-Radish",
-    Port == "Port.2" ~ "Rye-Radish",
-    Port == "Port.3" ~ "Rye-Radish",
-    Port == "Port.4" ~ "Rye-Vetch",
-    Port == "Port.5" ~ "Rye-Vetch",
-    Port == "Port.6" ~ "Rye-Vetch"
-  ))
+#Selecting Columns
+combined_transposed <- combined_transposed %>% 
+  select(Datetimes, logger, Port, WaterAmt)
+#view(combined_transposed)
 
 #Adding in Depths
-dataframe_A <- dataframe_A %>% 
+combined_transposed <- combined_transposed %>% 
   mutate(Depth.cm =case_when(
     Port == "Port.1" ~ "15",
     Port == "Port.2" ~ "30",
@@ -112,9 +105,20 @@ dataframe_A <- dataframe_A %>%
     Port == "Port.6" ~ "60"
   ))
 
-view(dataframe_A)
+#view(combined_transposed)
 
+#Adding in Treatments, Fallow Y/N
+combined_transposed <- combined_transposed %>% 
+  mutate(Treatment = case_when(
+    Port == "Port.1" ~ "Rye-Radish",
+    Port == "Port.2" ~ "Rye-Radish",
+    Port == "Port.3" ~ "Rye-Radish",
+    Port == "Port.4" ~ "Rye-Vetch",
+    Port == "Port.5" ~ "Rye-Vetch",
+    Port == "Port.6" ~ "Rye-Vetch"
+  ))
 
+view(combined_transposed)
 ```
 
 
