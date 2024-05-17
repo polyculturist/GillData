@@ -27,6 +27,59 @@ logger_G_data <- read.csv("~/GitHub/GillData/logger_G_data.csv", na.strings="#N/
 #head(logger_A_data)
 ```
 
+```{r labeling loggers and data hygeine, echo = F}
+#Logger A
+logger_A_data <- logger_A_data %>% 
+  mutate(logger = "A") %>% 
+  rename(Datetimes = "z6.07504")
+
+view(logger_A_data)
+
+#Logger C
+logger_C_data <- logger_C_data %>% 
+  mutate(logger = "C") %>% 
+  rename(Datetimes = "z6.07590")
+
+view(logger_C_data)
+
+#Logger D
+logger_D_data <- logger_D_data %>% 
+  mutate(logger = "D") %>% 
+  rename(Datetimes = "z6.07591")
+
+view(logger_D_data)
+
+#Logger E
+logger_E_data <- logger_E_data %>% 
+  mutate(logger = "E") %>% 
+  rename(Datetimes = "z6.07506")
+
+view(logger_E_data)
+
+#Logger F
+logger_F_data <- logger_F_data %>% 
+  mutate(logger = "F") %>% 
+  rename(Datetimes = "z6.07592")
+
+view(logger_F_data)
+
+
+#Logger G
+logger_G_data <- logger_G_data %>% 
+  mutate(logger = "G") %>% 
+  rename(Datetimes = "z6.07509")
+
+view(logger_G_data)
+
+
+#Combining all loggers' data
+
+
+
+
+
+
+```
 
 ```{r data transforming, echo = F}
 #transposing  data
