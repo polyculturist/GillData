@@ -44,49 +44,41 @@ view(Weather_Data)
 logger_A_data <- logger_A_data %>% 
   mutate(logger = "A") %>% 
   rename(Datetimes = "z6.07504")
-
 #view(logger_A_data)
 
 #Logger C
 logger_C_data <- logger_C_data %>% 
   mutate(logger = "C") %>% 
   rename(Datetimes = "z6.07590")
-
 #view(logger_C_data)
 
 #Logger D
 logger_D_data <- logger_D_data %>% 
   mutate(logger = "D") %>% 
   rename(Datetimes = "z6.07591")
-
 #view(logger_D_data)
 
 #Logger E
 logger_E_data <- logger_E_data %>% 
   mutate(logger = "E") %>% 
   rename(Datetimes = "z6.07506")
-
 #view(logger_E_data)
 
 #Logger F
 logger_F_data <- logger_F_data %>% 
   mutate(logger = "F") %>% 
   rename(Datetimes = "z6.07592")
-
 #view(logger_F_data)
 
 #Logger G
 logger_G_data <- logger_G_data %>% 
   mutate(logger = "G") %>% 
   rename(Datetimes = "z6.07509")
-
 #view(logger_G_data)
 
 #Combining all loggers' data
 combined_data <- rbind(logger_A_data, logger_C_data, logger_D_data, logger_E_data, logger_F_data, logger_G_data)
-
 #view(combined_data)
-
 ```
 
 ```{r data transforming, echo = F}
@@ -94,7 +86,6 @@ combined_data <- rbind(logger_A_data, logger_C_data, logger_D_data, logger_E_dat
 unique_columns <- c("Port.1", "Port.2", "Port.3", "Port.4", "Port.5", "Port.6")
 
 combined_transposed <- pivot_longer(combined_data, cols = all_of(unique_columns), names_to = "Port", values_to = "WaterAmt")
-
 #view(combined_transposed)
 
 #Conversion char to POSIXct (unix time)
@@ -116,7 +107,6 @@ combined_transposed <- combined_transposed %>%
     Port == "Port.5" ~ "30",
     Port == "Port.6" ~ "60"
   ))
-
 #view(combined_transposed)
 ```
 
@@ -145,7 +135,6 @@ df <- combined_transposed %>%
     TRUE ~ NA_character_
   )) %>% 
   mutate(Fallow_YN = ifelse(Treatment == "Fallow", "Y", "N"))
-  
 #view(df)
 ```
 
@@ -156,7 +145,6 @@ ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
   geom_smooth(na.rm = T) + 
  # geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
-
 
 #Timestamp vs. Water Content, color = Treatment
 ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
