@@ -17,14 +17,21 @@ library(tidyverse)
 
 
 ```{r data import, echo = F}
+#Soil Sensor Data
 logger_A_data <- read.csv("~/GitHub/GillData/logger_A_data.csv", na.strings="#N/A")
 logger_C_data <- read.csv("~/GitHub/GillData/logger_C_data.csv", na.strings="#N/A")
 logger_D_data <- read.csv("~/GitHub/GillData/logger_D_data.csv", na.strings="#N/A")
 logger_E_data <- read.csv("~/GitHub/GillData/logger_E_data.csv", na.strings="#N/A")
 logger_F_data <- read.csv("~/GitHub/GillData/logger_F_data.csv", na.strings="#N/A")
 logger_G_data <- read.csv("~/GitHub/GillData/logger_G_data.csv", na.strings="#N/A")
-
 #head(logger_A_data)
+
+#Soil Core and Plant Biomass Data
+
+
+
+#Weather Data
+
 ```
 
 ```{r labeling loggers and data hygeine, echo = F}
@@ -153,7 +160,7 @@ ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 #Timestamp vs. Water Content, color = Fallow YN
-ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN, shape = Depth.cm)) +
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN)) +
   geom_smooth(na.rm = T) + 
   #geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
@@ -161,8 +168,12 @@ ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN, shape = Depth.cm)
 
 ```{r Visualizations 2, echo = T}
 
+#Analyzing Interaction between Fallow and Depth
+df <- df %>% 
+  mutate(Interaction = interaction(Fallow_YN, Depth.cm))
 
-
-
+ggplot(df, aes(x = Interaction, y = WaterAmt, color = Fallow_YN)) +
+  geom_boxplot(na.rm = T)  
+  #scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 ```
