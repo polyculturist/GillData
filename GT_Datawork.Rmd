@@ -141,15 +141,21 @@ df <- combined_transposed %>%
 ```{r basic visualizations, echo = T}
 #Timestamp vs. Water Content, color = Depth
 ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
-  geom_smooth() + 
+  geom_smooth(na.rm = T) + 
  # geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 
 #Timestamp vs. Water Content, color = Treatment
 ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
-  geom_smooth() + 
+  geom_smooth(na.rm = T) + 
  # geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
+
+#Timestamp vs. Water Content, color = Fallow YN
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN, shape = Depth.cm)) +
+  geom_smooth(na.rm = T) + 
+  #geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 ```
 
