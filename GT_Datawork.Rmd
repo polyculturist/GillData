@@ -26,12 +26,17 @@ logger_F_data <- read.csv("~/GitHub/GillData/logger_F_data.csv", na.strings="#N/
 logger_G_data <- read.csv("~/GitHub/GillData/logger_G_data.csv", na.strings="#N/A")
 #head(logger_A_data)
 
-#Soil Core and Plant Biomass Data
+#Soil Core Data
+Soilcore_Data <- read.csv("~/GitHub/GillData/Soilcore_Data.csv")
+view(Soilcore_Data)
 
-
+#Biomass Data
+Biomass_Data <- read.csv("~/GitHub/GillData/Biomass_Data.csv")
+view(Biomass_Data)
 
 #Weather Data
-
+Weather_Data <- read.csv("~/GitHub/GillData/UC_Gill_Tract_Weather_Data.csv")
+view(Weather_Data)
 ```
 
 ```{r labeling loggers and data hygeine, echo = F}
