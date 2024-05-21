@@ -108,6 +108,12 @@ combined_transposed <- combined_transposed %>%
     Port == "Port.6" ~ "60"
   ))
 #view(combined_transposed)
+
+#Weather Data Fixing
+#Conversion char to POSIXct (unix time)
+Weather_Data$Datetimes <- as.POSIXct(Weather_Data$Datetime, format = "%m/%d/%y %H:%M", tz = "")
+#class(Weather_Data$Datetimes)
+
 ```
 
 ```{r Adding in Treatments, Fallow Y/N, echo = F}
@@ -159,14 +165,30 @@ ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN)) +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 ```
 
-```{r Visualizations 2, echo = T}
+```{r Weather Graphs, echo = T}
+##Analyzing Weather Data
+#Aggregating Daily Rainfall
+daily_rain <- Weather_Data %>% 
+  mutate(Date = as.Date(Datetimes)) %>%  #Extract the date part
+  group_by(Date) %>% 
+  summarise(daily_rainfall = sum(Rain...in, na.rm = T))
+  
+#print(daily_rain)
 
-#Analyzing Interaction between Fallow and Depth
-df <- df %>% 
-  mutate(Interaction = interaction(Fallow_YN, Depth.cm))
+ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
+  geom_col(fill = "blue", na.rm = T)
 
-ggplot(df, aes(x = Interaction, y = WaterAmt, color = Fallow_YN)) +
-  geom_boxplot(na.rm = T)  
-  #scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
+ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
+  geom_line(color = "blue", na.rm = T) +
+  geom_point(color = "blue", na.rm = T) +
+  labs(title = "UC Gill Tract 2023-24 Daily Rainfall",
+       x = "Date",
+       y = "Daily Rainfall (in)") +
+  theme_minimal()
+
+
+#Daily Temp High and Low
+
+
 
 ```
