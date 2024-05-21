@@ -176,9 +176,6 @@ daily_rain <- Weather_Data %>%
 #print(daily_rain)
 
 ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
-  geom_col(fill = "blue", na.rm = T)
-
-ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
   geom_line(color = "blue", na.rm = T) +
   geom_point(color = "blue", na.rm = T) +
   labs(title = "UC Gill Tract 2023-24 Daily Rainfall",
@@ -202,16 +199,19 @@ long_temps <- daily_temps %>%
   pivot_longer(cols = c(MinTemp, MaxTemp),
                names_to = "TempType",
                values_to = "Temp.F")
-#print(long_temps)
+
+long_temps$Temp.F <- as.numeric(long_temps$Temp.F)
+#str(long_temps)
 
 ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
-  geom_line(aes(group = TempType)) +
-  geom_point() + # Add points to the line plot for better visibility
-  labs(title = "Daily Minimum and Maximum Temperatures",
+  geom_line(aes(group = TempType), na.rm = T) +
+  geom_point(na.rm = T) + # Add points to the line plot for better visibility
+  labs(title = "UC Gill Tract 2023-24 Daily Minimum and Maximum Temperatures",
        x = "Date",
-       y = "Temperature (°C)") +
+       y = "Temperature (°F)") +
   scale_color_manual(values = c("MinTemp" = "blue", "MaxTemp" = "red"),
                      labels = c("Minimum Temperature", "Maximum Temperature")) +
   theme_minimal()
+
 
 ```
