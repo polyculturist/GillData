@@ -188,7 +188,30 @@ ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
 
 
 #Daily Temp High and Low
+daily_temps <- Weather_Data %>% 
+  mutate(Date = as.Date(Datetimes)) %>%  #Extract the date part
+  group_by(Date) %>% 
+  summarise(
+    MinTemp = min(Temp....F, na.rm = T),
+    MaxTemp = max(Temp....F, na.rm = T)
+  )
+#print(daily_temps)
 
+#Reshaping Max & Min Temp dataframe
+long_temps <- daily_temps %>% 
+  pivot_longer(cols = c(MinTemp, MaxTemp),
+               names_to = "TempType",
+               values_to = "Temp.F")
+#print(long_temps)
 
+ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
+  geom_line(aes(group = TempType)) +
+  geom_point() + # Add points to the line plot for better visibility
+  labs(title = "Daily Minimum and Maximum Temperatures",
+       x = "Date",
+       y = "Temperature (°C)") +
+  scale_color_manual(values = c("MinTemp" = "blue", "MaxTemp" = "red"),
+                     labels = c("Minimum Temperature", "Maximum Temperature")) +
+  theme_minimal()
 
 ```
