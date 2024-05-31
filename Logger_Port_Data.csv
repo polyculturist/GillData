@@ -1,0 +1,37 @@
+Logger_ID,Port,Depth,Plot Sampled,Treatment,Fallow YN
+A,1,15,2A,Rye-Radish,N
+A,2,30,2A,Rye-Radish,N
+A,3,60,2A,Rye-Radish,N
+A,4,15,1A,Rye-Vetch,N
+A,5,30,1A,Rye-Vetch,N
+A,6,60,1A,Rye-Vetch,N
+C,1,15,2B,Fallow,Y
+C,2,30,2B,Fallow,Y
+C,3,60,2B,Fallow,Y
+C,4,15,1B,4-seed mix,N
+C,5,30,1B,4-seed mix,N
+C,6,60,1B,4-seed mix,N
+D,1,15,6C,Rye Mono,N
+D,2,30,6C,Rye Mono,N
+D,3,60,6C,Rye Mono,N
+D,4,15,5C,Rye-Vetch,N
+D,5,30,5C,Rye-Vetch,N
+D,6,60,5C,Rye-Vetch,N
+E,1,15,4A,Rye-Vetch,N
+E,2,30,4A,Rye-Vetch,N
+E,3,60,4A,Rye-Vetch,N
+E,4,15,3A,Fallow,Y
+E,5,30,3A,Fallow,Y
+E,6,60,3A,Fallow,Y
+F,1,15,3C,4-seed,N
+F,2,30,3C,4-seed,N
+F,3,60,3C,4-seed,N
+F,4,15,4C,Rye Mono,N
+F,5,30,4C,Rye Mono,N
+F,6,60,4C,Rye Mono,N
+G,1,15,6A,4-seed,N
+G,2,30,6A,4-seed,N
+G,3,60,6A,4-seed,N
+G,4,15,5A,Fallow,Y
+G,5,30,5A,Fallow,Y
+G,6,60,5A,Fallow,Y
