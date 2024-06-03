@@ -1,7 +1,7 @@
 GT_Datawork
 ================
 migs
-2024-05-03
+2024-05-20
 
 ``` r
 library(ggplot2)
@@ -41,24 +41,95 @@ library(tidyverse)
 
 ``` r
 #Timestamp vs. Water Content, color = Depth
-ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
-  geom_point() + 
-  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
+  geom_smooth(na.rm = T) + 
+ # geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 ```
 
-    ## Warning: Removed 33598 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
+    ## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
 
-![](GT_Datawork_files/figure-gfm/visualizations-1.png)<!-- -->
+![](GT_Datawork_files/figure-gfm/basic%20visualizations-1.png)<!-- -->
 
 ``` r
 #Timestamp vs. Water Content, color = Treatment
-ggplot(dataframe_A, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
-  geom_point() + 
-  scale_y_continuous(limits = c(0.18, 0.37)) ##Removes negative values from calibration
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
+  geom_smooth(na.rm = T) + 
+ # geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 ```
 
-    ## Warning: Removed 33598 rows containing missing values or values outside the scale range
-    ## (`geom_point()`).
+    ## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
 
-![](GT_Datawork_files/figure-gfm/visualizations-2.png)<!-- -->
+![](GT_Datawork_files/figure-gfm/basic%20visualizations-2.png)<!-- -->
+
+``` r
+#Timestamp vs. Water Content, color = Fallow YN
+ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN)) +
+  geom_smooth(na.rm = T) + 
+  #geom_point() +
+  scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
+```
+
+    ## `geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = "cs")'
+
+![](GT_Datawork_files/figure-gfm/basic%20visualizations-3.png)<!-- -->
+
+``` r
+##Analyzing Weather Data
+#Aggregating Daily Rainfall
+daily_rain <- Weather_Data %>% 
+  mutate(Date = as.Date(Datetimes)) %>%  #Extract the date part
+  group_by(Date) %>% 
+  summarise(daily_rainfall = sum(Rain...in, na.rm = T))
+  
+#print(daily_rain)
+
+ggplot(daily_rain, aes(x = Date, y = daily_rainfall)) +
+  geom_line(color = "blue", na.rm = T) +
+  geom_point(color = "blue", na.rm = T) +
+  labs(title = "UC Gill Tract 2023-24 Daily Rainfall",
+       x = "Date",
+       y = "Daily Rainfall (in)") +
+  theme_minimal()
+```
+
+![](GT_Datawork_files/figure-gfm/Weather%20Graphs-1.png)<!-- -->
+
+``` r
+#Daily Temp High and Low
+daily_temps <- Weather_Data %>% 
+  mutate(Date = as.Date(Datetimes)) %>%  #Extract the date part
+  group_by(Date) %>% 
+  summarise(
+    MinTemp = min(Temp....F, na.rm = T),
+    MaxTemp = max(Temp....F, na.rm = T)
+  )
+#print(daily_temps)
+
+#Reshaping Max & Min Temp dataframe
+long_temps <- daily_temps %>% 
+  pivot_longer(cols = c(MinTemp, MaxTemp),
+               names_to = "TempType",
+               values_to = "Temp.F")
+
+long_temps$Temp.F <- as.numeric(long_temps$Temp.F)
+```
+
+    ## Warning: NAs introduced by coercion
+
+``` r
+#str(long_temps)
+
+ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
+  geom_line(aes(group = TempType), na.rm = T) +
+  geom_point(na.rm = T) + # Add points to the line plot for better visibility
+  labs(title = "UC Gill Tract 2023-24 Daily Minimum and Maximum Temperatures",
+       x = "Date",
+       y = "Temperature (°F)") +
+  scale_color_manual(values = c("MinTemp" = "blue", "MaxTemp" = "red"),
+                     labels = c("Minimum Temperature", "Maximum Temperature")) +
+  theme_minimal()
+```
+
+![](GT_Datawork_files/figure-gfm/Weather%20Graphs-2.png)<!-- -->
