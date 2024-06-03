@@ -224,6 +224,4 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
 
 #4. Tradeoffs: Planting early/term early to minimize water loss and protect groundwater (N scavenging), BUT irrigation would be needed. Would the irrigated water 'budget' be returned?
 
-
-
 ```
