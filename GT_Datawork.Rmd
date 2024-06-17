@@ -12,7 +12,6 @@ library(readr)
 library(RCurl)
 library(tidyr)
 library(tidyverse)
-
 ```
 
 
@@ -213,5 +212,16 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
                      labels = c("Minimum Temperature", "Maximum Temperature")) +
   theme_minimal()
 
+
+```
+
+```{r Notes for future directions, echo = T}
+#1. What do the diff treatments look like in biomass? Is it significant? Does it represent greater N uptake?
+
+#2. Can I use et models (combination, energy transfer) to distinguish between treatments?
+
+#3. What does the drydown look like (post-April) for different treatments?
+
+#4. Tradeoffs: Planting early/term early to minimize water loss and protect groundwater (N scavenging), BUT irrigation would be needed. Would the irrigated water 'budget' be returned?
 
 ```
