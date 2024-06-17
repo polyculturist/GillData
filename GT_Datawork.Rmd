@@ -117,7 +117,7 @@ Weather_Data$Datetimes <- as.POSIXct(Weather_Data$Datetime, format = "%m/%d/%y %
 
 ```{r Adding in Treatments, Fallow Y/N, echo = F}
 #Adding Treatments
-df <- combined_transposed %>% 
+Sensor_Data <- combined_transposed %>% 
   mutate(Treatment = case_when(
     #Logger A
       ((Port == "Port.1" | Port == "Port.2" | Port == "Port.3") & logger == "A") ~ "Rye-Radish",
@@ -140,25 +140,25 @@ df <- combined_transposed %>%
     TRUE ~ NA_character_
   )) %>% 
   mutate(Fallow_YN = ifelse(Treatment == "Fallow", "Y", "N"))
-#view(df)
+view(Sensor_Data)
 ```
 
 
 ```{r basic visualizations, echo = T}
 #Timestamp vs. Water Content, color = Depth
-ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
+ggplot(Sensor_Data, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
   geom_smooth(na.rm = T) + 
  # geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 #Timestamp vs. Water Content, color = Treatment
-ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
+ggplot(Sensor_Data, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
   geom_smooth(na.rm = T) + 
  # geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 #Timestamp vs. Water Content, color = Fallow YN
-ggplot(df, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN)) +
+ggplot(Sensor_Data, aes(x = Datetimes, y = WaterAmt, color = Fallow_YN)) +
   geom_smooth(na.rm = T) + 
   #geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
@@ -215,13 +215,30 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
 
 ```
 
+```{r Biomass Data, echo = T}
+#Adding in Yield Calculations
+Biomass_Data$Yield <- Biomass_Data$Biomass.Weight..g.*35.686
+view(Biomass_Data)
+
+#Yield Histogram
+ggplot(Biomass_Data)
+
+
+
+
+
+```
+
 ```{r Notes for future directions, echo = T}
 #1. What do the diff treatments look like in biomass? Is it significant? Does it represent greater N uptake?
 
 #2. Can I use et models (combination, energy transfer) to distinguish between treatments?
 
 #3. What does the drydown look like (post-April) for different treatments?
+#3b. Does soilcore data match soil sensor data?
 
 #4. Tradeoffs: Planting early/term early to minimize water loss and protect groundwater (N scavenging), BUT irrigation would be needed. Would the irrigated water 'budget' be returned?
+
+#5. Apply Evapotranspiration Package (look at parameters)
 
 ```
