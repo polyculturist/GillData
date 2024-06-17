@@ -133,3 +133,13 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
 ```
 
 ![](GT_Datawork_files/figure-gfm/Weather%20Graphs-2.png)<!-- -->
+
+``` r
+#1. What do the diff treatments look like in biomass? Is it significant? Does it represent greater N uptake?
+
+#2. Can I use et models (combination, energy transfer) to distinguish between treatments?
+
+#3. What does the drydown look like (post-April) for different treatments?
+
+#4. Tradeoffs: Planting early/term early to minimize water loss and protect groundwater (N scavenging), BUT irrigation would be needed. Would the irrigated water 'budget' be returned?
+```
