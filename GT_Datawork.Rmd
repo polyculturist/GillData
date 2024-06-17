@@ -226,7 +226,6 @@ ggplot(Biomass_Data)
 
 
 
-
 ```
 
 ```{r Notes for future directions, echo = T}
