@@ -1,25 +1,25 @@
 Plot,Treatment,Fallow_YN
-1A,Rye-Vetch,
-1B,4-seed,
-1C,Rye-Mustard,
-2A,Rye-Radish,
-2B,Fallow,
-2C,Rye Mono,
-3A,Fallow,
-3B,Rye-Radish,
-3C,4-seed,
-4A,Rye-Vetch,
-4B,Rye-Mustard,
-4C,Rye Mono,
-5A,Fallow,
-5B,Rye-Mustard,
-5C,Rye-Vetch,
-6A,4-seed,
-6B,Rye-Radish,
-6C,Rye Mono,
-7A,Rye-Radish,
-7B,Rye Mono,
-7C,4-seed,
-8A,Rye-Mustard,
-8B,Rye-Vetch,
-8C,Fallow,
+1A,Rye-Vetch,N
+1B,4-seed,N
+1C,Rye-Mustard,N
+2A,Rye-Radish,N
+2B,Fallow,Y
+2C,Rye Mono,N
+3A,Fallow,Y
+3B,Rye-Radish,N
+3C,4-seed,N
+4A,Rye-Vetch,N
+4B,Rye-Mustard,N
+4C,Rye Mono,N
+5A,Fallow,Y
+5B,Rye-Mustard,N
+5C,Rye-Vetch,N
+6A,4-seed,N
+6B,Rye-Radish,N
+6C,Rye Mono,N
+7A,Rye-Radish,N
+7B,Rye Mono,N
+7C,4-seed,N
+8A,Rye-Mustard,N
+8B,Rye-Vetch,N
+8C,Fallow,Y
