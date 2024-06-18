@@ -16,6 +16,10 @@ library(tidyverse)
 
 
 ```{r data import, echo = F}
+#Plot References Data
+plot_references <- read.csv("~/GitHub/GillData/Plot_References.csv", na.strings="#N/A")
+view(plot_references)
+
 #Soil Sensor Data
 logger_A_data <- read.csv("~/GitHub/GillData/logger_A_data.csv", na.strings="#N/A")
 logger_C_data <- read.csv("~/GitHub/GillData/logger_C_data.csv", na.strings="#N/A")
