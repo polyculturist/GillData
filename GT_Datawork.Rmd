@@ -12,6 +12,7 @@ library(readr)
 library(RCurl)
 library(tidyr)
 library(tidyverse)
+library(Evapotranspiration)
 ```
 
 
@@ -272,6 +273,23 @@ ggplot(Soilcore_Data, aes(x = Treatment, y = GWC....)) +
 
 
 
+
+```
+
+
+```{r ET, echo = T}
+#For Penman-Montieth calculation, need: https://www.rdocumentation.org/packages/Evapotranspiration/versions/1.16/topics/ET.PenmanMonteith
+ #1. subdaily temp max and daily temp min
+ #2. subdaily relative humidity in percentage
+ #3. subdaily solar radiation in Megajoule per square meter (Rs), currently in W/square meter
+ #4. subdaily wind speed in meter per second (uz), currently in mph
+
+
+view(Weather_Data)
+
+
+
+######NEEDS WORK########
 
 ```
 
