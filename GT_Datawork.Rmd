@@ -127,7 +127,7 @@ Sensor_Data <- combined_transposed %>%
       ((Port == "Port.4" | Port == "Port.5" | Port == "Port.6") & logger == "C") ~ "4-seed",
     #Logger D
       ((Port == "Port.1" | Port == "Port.2" | Port == "Port.3") & logger == "D") ~ "Rye Mono",
-      ((Port == "Port.4" | Port == "Port.5" | Port == "Port.6") & logger == "D") ~ "Rye-vetch",    
+      ((Port == "Port.4" | Port == "Port.5" | Port == "Port.6") & logger == "D") ~ "Rye-Vetch",    
     #Logger E
       ((Port == "Port.1" | Port == "Port.2" | Port == "Port.3") & logger == "E") ~ "Rye-Vetch",
       ((Port == "Port.4" | Port == "Port.5" | Port == "Port.6") & logger == "E") ~ "Fallow",    
@@ -221,7 +221,7 @@ Biomass_Data$Yield <- Biomass_Data$Biomass.Weight..g.*35.686
 view(Biomass_Data)
 
 #Yield Histogram
-ggplot(Biomass_Data)
+ggplot(Biomass_Data, aes())
 
 
 
