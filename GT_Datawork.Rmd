@@ -233,11 +233,12 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
 #Adding in Yield Calculations
 Biomass_Data <- Biomass_Data %>% 
   mutate(Yield = (Biomass.Weight..g.* 35.686))
+  
 #view(Biomass_Data)
 
 #Yield Histogram
 ggplot(Biomass_Data, aes(x = Harvest.Treatment, y = Yield)) +
-  geom_hline(yintercept = 4500, color = "red", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = 4500, color = "red", linetype = "dashed", size = 1) + ##SGMA CC Credit Criteria
   geom_boxplot(na.rm = T) +
   geom_dotplot(binaxis = 'y',
                stackdir = 'center',
@@ -246,11 +247,20 @@ ggplot(Biomass_Data, aes(x = Harvest.Treatment, y = Yield)) +
        x = "Cover Crop Termination Timing",
        y = "Dry Yield (lbs/acre)")
 
+#For 120 day data, which treatments reached 4500 lb/acre?
+later_date_biomass <- Biomass_Data %>% 
+  filter(Harvest.Treatment == "120 Day")
 
-
-
-
-
+ggplot(later_date_biomass, aes(x = Treatment, y = Yield, color = Treatment)) +
+  geom_hline(yintercept = 4500, color = "red", linetype = "dashed", size = 1) + ##SGMA CC Credit Criteria
+  geom_boxplot(na.rm = T) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               dotsize = 0.7) +
+  labs(title = "120 Day Harvest Dry Yield by Treatment",
+       x = "Treatment",
+       y = "Dry Yield (lbs/acre)")
+##Note: Only Rye-Mustard and Rye Mono CONSITENTLY reached over 4,500 lb/acre threshold. This was predicted as they were the most 'aggressive' growth mixes, but its amazing to see reflected in the data. Rye-Vetch had lowest out the treatments, even though rye here was planted at 80% of its mono, aka, vetch did really well but didn't accumulate biomass, likely because it grows out, not up. 
 ```
 
 ```{r Notes for future directions, echo = T}
