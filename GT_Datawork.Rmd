@@ -233,7 +233,6 @@ ggplot(long_temps, aes(x = Date, y = Temp.F, color = TempType)) +
 #Adding in Yield Calculations
 Biomass_Data <- Biomass_Data %>% 
   mutate(Yield = (Biomass.Weight..g.* 35.686))
-  
 #view(Biomass_Data)
 
 #Yield Histogram
@@ -263,16 +262,26 @@ ggplot(later_date_biomass, aes(x = Treatment, y = Yield, color = Treatment)) +
 ##Note: Only Rye-Mustard and Rye Mono CONSITENTLY reached over 4,500 lb/acre threshold. This was predicted as they were the most 'aggressive' growth mixes, but its amazing to see reflected in the data. Rye-Vetch had lowest out the treatments, even though rye here was planted at 80% of its mono, aka, vetch did really well but didn't accumulate biomass, likely because it grows out, not up. 
 ```
 
+```{r Soilcore Data, echo = T}
+
+#Plotting Soilcore GWC vs. Fallow_YN
+ggplot(Soilcore_Data, aes(x = Treatment, y = GWC....)) +
+  geom_boxplot(na.rm = T)
+
+######NEEDS WORK########
+
+
+
+
+```
+
 ```{r Notes for future directions, echo = T}
-#1. What do the diff treatments look like in biomass? Is it significant? Does it represent greater N uptake?
+ ##DONE #1. What do the diff treatments look like in biomass? Is it significant? Does it represent greater N uptake?
 
-#2. Can I use et models (combination, energy transfer) to distinguish between treatments?
+#2. What does the drydown look like (post-April) for different treatments? Does soilcore data match soil sensor data?
 
-#3. What does the drydown look like (post-April) for different treatments?
-#3b. Does soilcore data match soil sensor data?
+#3. Can I use et models (combination, energy transfer) to distinguish between treatments? Apply Evapotranspiration Package (look at parameters)
 
 #4. Tradeoffs: Planting early/term early to minimize water loss and protect groundwater (N scavenging), BUT irrigation would be needed. Would the irrigated water 'budget' be returned?
-
-#5. Apply Evapotranspiration Package (look at parameters)
 
 ```
