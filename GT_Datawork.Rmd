@@ -1,7 +1,7 @@
 ---
 title: "GT_Datawork"
 author: "migs" 
-date: "2024-05-20"
+date: "2024-06-17"
 output: github_document
 ---
 
@@ -82,6 +82,16 @@ logger_G_data <- logger_G_data %>%
 #Combining all loggers' data
 combined_data <- rbind(logger_A_data, logger_C_data, logger_D_data, logger_E_data, logger_F_data, logger_G_data)
 #view(combined_data)
+
+#Data Joining using plot references
+#Biomass Data
+Biomass_Data <- full_join(Biomass_Data, plot_references, by = 'Plot')
+#view(Biomass_Data)
+
+#Soilcore Data
+Soilcore_Data <- full_join(Soilcore_Data, plot_references, by = 'Plot')
+view(Soilcore_Data)
+
 ```
 
 ```{r data transforming, echo = F}
@@ -225,7 +235,14 @@ Biomass_Data$Yield <- Biomass_Data$Biomass.Weight..g.*35.686
 view(Biomass_Data)
 
 #Yield Histogram
-ggplot(Biomass_Data, aes())
+ggplot(Biomass_Data, aes(x = Harvest.Treatment, y = Yield)) +
+  geom_hline(yintercept = 4500, color = "red", linetype = "dashed", size = 1) +
+  geom_boxplot(na.rm = T) +
+  geom_dotplot(binaxis = 'y',
+               stackdir = 'center',
+               dotsize = 0.7)
+
+
 
 
 
