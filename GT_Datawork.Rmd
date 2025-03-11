@@ -169,7 +169,8 @@ ggplot(Sensor_Data, aes(x = Datetimes, y = WaterAmt, color = Depth.cm)) +
 #Timestamp vs. Water Content, color = Treatment
 ggplot(Sensor_Data, aes(x = Datetimes, y = WaterAmt, color = Treatment)) +
   geom_smooth(na.rm = T) + 
- # geom_point() +
+  ggtitle("Soil Moisture Content Over Winter Season for Cover Crop Treatments") +
+ ##geom_point() +
   scale_y_continuous(limits = c(0.18, 0.45)) ##Removes negative values from calibration
 
 #Timestamp vs. Water Content, color = Fallow YN
